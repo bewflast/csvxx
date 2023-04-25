@@ -1,5 +1,4 @@
-#include <gtest/gtest.h>
-#include "FileBase/UniqueFileDescriptor.hpp"
+#include "tests.hpp"
 
 TEST(uniqueFD, invalidFileDescriptor)
 {
@@ -10,14 +9,14 @@ TEST(uniqueFD, invalidFileDescriptor)
 
 TEST(uniqueFD, validFileDescriptor)
 {
-	platform::UniqueFileDescriptor fd(platform::createFile("../data/a.txt"));
+	platform::UniqueFileDescriptor fd(platform::createFile(DATA_FILE("a.txt")));
 
 	EXPECT_TRUE(fd.isValid());
 }
 
 TEST(uniqueFD, invalidFdAfterMoveAssignment)
 {
-	platform::UniqueFileDescriptor fd(platform::createFile("../data/a.txt"));
+	platform::UniqueFileDescriptor fd(platform::createFile(DATA_FILE("a.txt")));
 	platform::UniqueFileDescriptor otherFd(platform::createFile("notExisting"));
 
 	EXPECT_TRUE(fd.isValid());
@@ -31,7 +30,7 @@ TEST(uniqueFD, invalidFdAfterMoveAssignment)
 
 TEST(uniqueFD, invalidFdAfterMoveConstruction)
 {
-	platform::UniqueFileDescriptor fd(platform::createFile("../data/a.txt"));
+	platform::UniqueFileDescriptor fd(platform::createFile(DATA_FILE("a.txt")));
 	EXPECT_TRUE(fd.isValid());
 	platform::UniqueFileDescriptor otherFd(std::move(fd));
 

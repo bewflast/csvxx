@@ -6,10 +6,8 @@
 
 #ifdef _WINDOWS
 # include "FileBase/platformDefines/windows.hpp"
-# define GET_SYSTEM_ERROR_NUM static_cast<int>(GetLastError())
 #else
 # include "FileBase/platformDefines/linux.hpp"
-# define GET_SYSTEM_ERROR_NUM static_cast<int>(errno)
 #endif
 
 namespace CSVXX

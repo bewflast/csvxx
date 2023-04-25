@@ -1,6 +1,4 @@
-#include <fstream>
-#include <gtest/gtest.h>
-#include <FileBase/File.hpp>
+#include "tests.hpp"
 
 TEST(file, notExistingFileOpeningFailure)
 {
@@ -9,18 +7,18 @@ TEST(file, notExistingFileOpeningFailure)
 
 TEST(file, existingFileOpeningSuccess)
 {
-	EXPECT_NO_THROW(platform::File("../data/a.txt"));
+	EXPECT_NO_THROW(platform::File(DATA_FILE("a.txt")));
 }
 
 TEST(file, correctFileSize)
 {
 	std::string_view testFileContent = "1234567890sdjagjdklfshfdjhgsjdfghskdlfgsldkfjhsdklfsd";
-	std::ofstream testFileInput("../data/temp.txt");
+	std::ofstream testFileInput(DATA_FILE("temp.txt"));
 
 	testFileInput << testFileContent;
 	testFileInput.close();
 
-	platform::File file("../data/temp.txt");
+	platform::File file(DATA_FILE("temp.txt"));
 
 	EXPECT_EQ(file.getSize(), testFileContent.size());
 }

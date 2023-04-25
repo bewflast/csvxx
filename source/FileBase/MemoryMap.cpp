@@ -21,17 +21,20 @@ platform::MemoryMap::MemoryMap( const char* pathToFileForMapping )
 
 # else
 
-::MemoryMap::MemoryMap( const char* pathToFileForMapping )
+platform::MemoryMap::MemoryMap( const char* pathToFileForMapping )
 :
 		_fileToMap(pathToFileForMapping),
 		_dataLen(_fileToMap.getSize()),
 		_data(nullptr)
 {
-	_data = static_cast<const std::byte*>(platform::createMappedViewOfFile(
+	platform::fileMapping memMap{ platform::createMappedViewOfFile(
 			static_cast<platform::fileHandle>(_fileToMap.getDescriptor()),
-			_fileToMap.getSize()));
-	if (!_data)
+			_fileToMap.getSize()) };
+
+	if (memMap == INVALID_MEMMAP_HANDLE)
 		throw (CSVXX::SystemException("Failed to map view of file: "));
+
+	_data = static_cast<const std::byte*>(memMap);
 }
 
 #endif
@@ -43,7 +46,7 @@ const std::byte*	platform::MemoryMap::getData() const noexcept
 
 platform::MemoryMap::~MemoryMap()
 {
-	platform::unmapView(static_cast<platform::fileMapping>(_data));
+	platform::unmap(static_cast<platform::fileMapping>(const_cast<std::byte*>(_data)), dataLength());
 }
 
 platform::fileSize platform::MemoryMap::dataLength() const noexcept
