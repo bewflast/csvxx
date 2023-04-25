@@ -4,7 +4,8 @@ project("gtest")
 
 set(SOURCES test_memmap.cpp
             test_file.cpp
-            test_uniquefd.cpp)
+            test_uniquefd.cpp
+            test_filebase.cpp)
 set(BUILD_SHARED_LIBS OFF)
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 

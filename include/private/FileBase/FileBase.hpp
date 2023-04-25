@@ -1,36 +1,26 @@
 #ifndef CSV_FILEBASE_HPP
 #define CSV_FILEBASE_HPP
-#define UNICODE
 
-namespace CSVXX
+# include <string_view>
+# include "MemoryMap.hpp"
+
+namespace platform
 {
 	class FileBase;
-	class DataFrame;
 }
 
-# include "platformDefines/platform.hpp"
-# include <memory>
-# include <filesystem>
-# include <string_view>
-
-class CSVXX::FileBase final
+class platform::FileBase final
 {
 public:
-	friend class CSVXX::DataFrame;
+	explicit FileBase(  const char* filePath );
 
-	platform::fileHandle 				_hFile;
-	platform::fileHandle 				_hFileMap;
-	std::size_t 						_fileSize;
+	std::u8string_view getRawFileContent() const noexcept;
+	const char8_t* getDataPtr() const noexcept;
 
-	std::filesystem::path				_filePath;
-	std::filesystem::path				_fileName;
-
-	const std::byte*					_data;
-
-public:
-	explicit FileBase(  std::filesystem::path& filePath );
-	~FileBase();
-
+private:
+	platform::MemoryMap		_mappedData;
+	const char8_t*			_dataPtr;
+	std::u8string_view 		_rawFileContent;
 };
 
 

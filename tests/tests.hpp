@@ -5,6 +5,7 @@
 # include <fstream>
 # include <gtest/gtest.h>
 # include <FileBase/File.hpp>
+# include <FileBase/FileBase.hpp>
 # include <FileBase/MemoryMap.hpp>
 # include <FileBase/UniqueFileDescriptor.hpp>
 

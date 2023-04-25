@@ -8,7 +8,7 @@ namespace platform
 	class UniqueFileDescriptor;
 }
 
-class platform::UniqueFileDescriptor
+class platform::UniqueFileDescriptor final
 {
 
 public:

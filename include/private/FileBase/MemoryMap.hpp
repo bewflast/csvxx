@@ -8,7 +8,7 @@ namespace platform
 	class MemoryMap;
 }
 
-class platform::MemoryMap
+class platform::MemoryMap final
 {
 
 public:
@@ -20,6 +20,12 @@ public:
 
 	[[nodiscard]]
 	platform::fileSize	dataLength() const noexcept;
+
+	MemoryMap() 												= delete;
+	MemoryMap( const MemoryMap& other ) 						= delete;
+	MemoryMap( const MemoryMap&& other ) 			noexcept 	= delete;
+	MemoryMap& operator=( const MemoryMap& other ) 				= delete;
+	MemoryMap& operator=( const MemoryMap&& other )	noexcept	= delete;
 
 private:
 	platform::File		_fileToMap;

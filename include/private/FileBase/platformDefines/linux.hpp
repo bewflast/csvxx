@@ -27,5 +27,6 @@ namespace platform
 # define INVALID_DESCRIPTOR 	static_cast<int>(-1)
 # define GET_SYSTEM_ERROR_NUM 	static_cast<int>(errno)
 # define INVALID_MEMMAP_HANDLE	MAP_FAILED
+# define INVALID_CLOSE_DESC_VAL	static_cast<int>(-1)
 
 #endif //CSVXX_LINUX_HPP

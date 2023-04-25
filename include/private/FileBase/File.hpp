@@ -8,7 +8,7 @@ namespace platform
 	class File;
 }
 
-class platform::File
+class platform::File final
 {
 public:
 	explicit File( const char* filePath );
@@ -18,6 +18,12 @@ public:
 
 	[[nodiscard]]
 	platform::fileHandle getDescriptor() const noexcept;
+
+	File() 												= delete;
+	File( const File& other ) 							= delete;
+	File( const File&& other ) 				noexcept 	= delete;
+	File& operator=( const File& other ) 				= delete;
+	File& operator=( const File&& other )	noexcept	= delete;
 
 private:
 	platform::UniqueFileDescriptor _fd;

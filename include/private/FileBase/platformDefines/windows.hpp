@@ -6,7 +6,7 @@
 
 namespace platform
 {
-	using fileSize 			= DWORD;
+	using fileSize 			= size_t;
 	using fileHandle 		= HANDLE;
 	using fileMapping		= LPCVOID;
 	using unmapResultType	= BOOL;
@@ -28,5 +28,7 @@ namespace platform
 # define INVALID_DESCRIPTOR 	INVALID_HANDLE_VALUE
 # define GET_SYSTEM_ERROR_NUM 	static_cast<int>(GetLastError())
 # define INVALID_MEMMAP_HANDLE	NULL
+# define INVALID_CLOSE_DESC_VAL	static_cast<BOOL>(0)
+
 
 #endif //CSVXX_WINDOWS_HPP
